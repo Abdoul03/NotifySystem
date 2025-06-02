@@ -1,3 +1,5 @@
+package model;
+
 public class Notification {
     int id;
     Employe employe;
