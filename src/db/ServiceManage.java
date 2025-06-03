@@ -3,10 +3,9 @@ package db;
 import interfaces.DataBaseManage;
 import model.Service;
 
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceManage implements DataBaseManage {
     public static void saveService(Service s){
@@ -24,5 +23,26 @@ public class ServiceManage implements DataBaseManage {
         } catch (Exception e) {
             System.out.println("Erreur lors de l'enregistrement : " + e.getMessage());
         }
+    }
+    public static List<Service> afficheService(){
+       List <Service> services = new ArrayList<>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String sql = "SELECT * FROM service";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+               Service service = new Service(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("des"),
+                        rs.getInt("IdEmploye")
+                );
+               services.add(service);
+            }
+        }catch (Exception e){
+            System.out.println("Erreur lors de l'affichage : " + e.getMessage());
+        }
+        return services;
     }
 }

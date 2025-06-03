@@ -3,7 +3,9 @@ package controller;
 import db.ServiceManage;
 import model.Employe;
 import model.Service;
+import view.ServiceInterface;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ServiceController {
@@ -19,6 +21,14 @@ public class ServiceController {
         Service service = new Service(nom,des,employeId);
         ServiceManage.saveService(service);
 
-        System.out.println();
+    }
+    public  void affichersServices(){
+        System.out.println("Liste des Services");
+
+        List<Service> services = ServiceManage.afficheService() ;
+        for (Service s :services) {
+            System.out.println("Nom :" + " " + s.getNom() + " " + "Description :" + " " + s.getDes());
+        }
+        ServiceInterface.serviceMenu();
     }
 }

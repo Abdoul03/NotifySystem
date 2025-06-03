@@ -18,6 +18,13 @@ public class Service {
         this.IdEmploye = IdEmploye;
 
     }
+    public Service( int id,String nom, String des, int IdEmploye) {
+        this.id=id;
+        this.nom = nom;
+        this.des = des;
+        this.IdEmploye = IdEmploye;
+
+    }
 
     public int getId() {
         return id;

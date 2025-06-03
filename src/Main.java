@@ -10,7 +10,6 @@ public class Main {
         int choix;
 
        do {
-            System.out.println("Bonjour et bienvenue!");
             System.out.println("\n=== Menu Principal ===");
             System.out.println("1. Créer un compte");
             System.out.println("2. Se connecter");
