@@ -1,19 +1,20 @@
 package model;
-
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 public class Message {
     private int id;
-    private String description;
+    private String contenue;
     private LocalDateTime dateEnvoi;
-    private Long employeId;
+    private long employeId;
+    private long receiverID;
 
-    public Message (int id, String description, Long employeId){
+    public Message (int id, String contenue, long employeId, long receiverID){
         this.id = id;
-        this.description = description;
+        this.contenue = contenue;
         this.dateEnvoi = LocalDateTime.now();
         this.employeId = employeId;
+        this.receiverID = receiverID;
 
     }
 
@@ -29,16 +30,16 @@ public class Message {
         return employeId;
     }
 
-    public void setEmployeId(Long employeId) {
+    public void setEmployeId(long employeId) {
         this.employeId = employeId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContenue() {
+        return contenue;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContenue(String contenue) {
+        this.contenue = contenue;
     }
 
     public LocalDateTime getDateEnvoi() {
@@ -49,5 +50,11 @@ public class Message {
         this.dateEnvoi = dateEnvoi;
     }
 
+    public long getReceiverID() {
+        return receiverID;
+    }
 
+    public void setReceiverID(long receiverID) {
+        this.receiverID = receiverID;
+    }
 }

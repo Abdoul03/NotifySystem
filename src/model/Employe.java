@@ -6,6 +6,13 @@ public class Employe {
     private String prenom;
     private String email;
 
+    //Lors de la l'enregistrement
+    public Employe(String nom, String prenom, String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }
+    //Apres l'enregistrement
     public Employe(int id, String nom, String prenom, String email){
         this.id = id;
         this.nom = nom;
