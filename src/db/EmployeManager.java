@@ -37,7 +37,8 @@ public class EmployeManager implements DataBaseManage {
                         rs.getInt("id"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
-                        rs.getString("email")
+                        rs.getString("email"),
+                        rs.getBoolean("isabonnee")
                 );
             }
 
@@ -47,4 +48,29 @@ public class EmployeManager implements DataBaseManage {
 
         return employe;
     }
+
+    public static Employe getEmployeById(int id) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String sql = "SELECT * FROM employe WHERE id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                Employe employe = new Employe(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getBoolean("isabonnee")
+                );
+                return employe;
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+        return null;
+    }
+
 }

@@ -11,8 +11,7 @@ public class Service {
     private List<Integer> membersId = new ArrayList<>();
 
 
-    public Service( String nom, String des, int IdEmploye
-                   ) {
+    public Service( String nom, String des, int IdEmploye) {
         this.nom = nom;
         this.des = des;
         this.IdEmploye = IdEmploye;

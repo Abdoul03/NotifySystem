@@ -1,6 +1,7 @@
 package db;
 
 import interfaces.DataBaseManage;
+import model.Employe;
 import model.Service;
 
 import java.sql.*;
@@ -24,6 +25,7 @@ public class ServiceManage implements DataBaseManage {
             System.out.println("Erreur lors de l'enregistrement : " + e.getMessage());
         }
     }
+
     public static List<Service> afficheService(){
        List <Service> services = new ArrayList<>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -40,9 +42,50 @@ public class ServiceManage implements DataBaseManage {
                 );
                services.add(service);
             }
-        }catch (Exception e){
-            System.out.println("Erreur lors de l'affichage : " + e.getMessage());
+        }catch (Exception ex){
+            System.out.println("Erreur lors de l'affichage : " + ex.getMessage());
         }
         return services;
     }
+
+    public static boolean abonnerUtilisateur(Employe e, Service s){
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+
+            // Vérifier si l’abonnement existe déjà
+            String sql = "SELECT * FROM employe_service WHERE employe_id = ? AND service_id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, e.getId());
+            stmt.setInt(2, s.getId());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return false; // déjà abonné
+            }
+            //ajouter l'utilisateur a un service
+            String insertSql = "INSERT INTO employe_service (employe_id, service_id) VALUES (?, ?)";
+            PreparedStatement stmtI = con.prepareStatement(insertSql);
+            stmtI.setInt(1, e.getId());
+            stmtI.setInt(2, s.getId());
+            stmtI.executeUpdate();
+
+            System.out.println(" Utilisateur abonné avec succès !");
+            return true;
+        }catch (Exception ex){
+            System.out.println("Erreur lors l'abonnement : " + ex.getMessage());
+            return false;
+        }
+    }
+    public static boolean desabonnerUtilisateur(Employe e, Service s) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String sql = "DELETE FROM employe_service WHERE employe_id = ? AND service_id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, e.getId());
+            stmt.setInt(2, s.getId());
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception ex) {
+            System.out.println("Erreur lors du désabonnement : " + ex.getMessage());
+            return false;
+        }
+    }
+
 }

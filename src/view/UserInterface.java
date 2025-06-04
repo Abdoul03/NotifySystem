@@ -21,7 +21,7 @@ public class UserInterface {
                     new ServiceController().createServiceNotification(id);
                     break;
                 case 2:
-                    new ServiceController().affichersServices();
+                    new ServiceController().affichersServices(id);
                     break;
                 case 3:
                     System.out.println("Vous êtes déconnecter !");
