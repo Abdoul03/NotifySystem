@@ -4,6 +4,7 @@ import db.EmployeManager;
 import db.ServiceManage;
 import model.Employe;
 import model.Service;
+import view.MessageInterface;
 import view.ServiceInterface;
 
 import java.util.List;
@@ -34,9 +35,9 @@ public class ServiceController {
         ServiceInterface.serviceMenu(employeId);
     }
 
-    public void serviceAbonnement(int employeId){
-        Scanner scanner= new Scanner(System.in);
-        List<Service> services = ServiceManage.afficheService() ;
+    public void serviceAbonnement(int employeId) {
+        Scanner scanner = new Scanner(System.in);
+        List<Service> services = ServiceManage.afficheService();
 
         if (services.isEmpty()) {
             System.out.println("Aucun service disponible pour le moment.");
@@ -50,6 +51,7 @@ public class ServiceController {
             return;
         }
 
+        Service serviceChoisi = null;
         while (true) {
             System.out.println("Selectionner le service à la quel vous voulez-vous abonnée");
             for (Service s : services) {
@@ -71,7 +73,7 @@ public class ServiceController {
             }
 
             // Vérifie si le service avec cet ID existe
-            Service serviceChoisi = null;
+            serviceChoisi = null;
             for (Service s : services) {
                 if (s.getId() == choix) {
                     serviceChoisi = s;
@@ -84,9 +86,11 @@ public class ServiceController {
                 boolean success = ServiceManage.abonnerUtilisateur(employe, serviceChoisi);
                 if (success) {
                     System.out.println("Abonnement réussi au service : " + serviceChoisi.getNom());
+                    //MessageInterface.messageMenu(employeId, serviceChoisi.getId());
                 } else {
                     System.out.println("Vous êtes déjà abonné à ce service.");
                 }
+                MessageInterface.messageMenu(employeId, serviceChoisi.getId());
             } else {
                 System.out.println("Aucun service trouvé avec l’ID " + choix);
             }

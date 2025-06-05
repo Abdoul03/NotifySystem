@@ -21,7 +21,7 @@ public class ServiceInterface {
                     new ServiceController().serviceAbonnement(employeId);
                     break;
                 case 2:
-                    new  ServiceController().serviceAbonnement(employeId);
+                    new  ServiceController().serviceDesabonnee(employeId);
                     break;
                 case 3:
                     System.out.println("retour");

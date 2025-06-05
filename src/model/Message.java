@@ -1,4 +1,5 @@
 package model;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 
@@ -7,16 +8,18 @@ public class Message {
     private String contenue;
     private LocalDateTime dateEnvoi;
     private long employeId;
-    private long receiverID;
 
-    public Message (int id, String contenue, long employeId, long receiverID){
+    public Message (String contenue, long employeId){
+        this.contenue = contenue;
+        this.dateEnvoi = LocalDateTime.now();
+        this.employeId = employeId;
+    }
+ /*   public Message (int id, String contenue, long employeId){
         this.id = id;
         this.contenue = contenue;
         this.dateEnvoi = LocalDateTime.now();
         this.employeId = employeId;
-        this.receiverID = receiverID;
-
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -50,11 +53,4 @@ public class Message {
         this.dateEnvoi = dateEnvoi;
     }
 
-    public long getReceiverID() {
-        return receiverID;
-    }
-
-    public void setReceiverID(long receiverID) {
-        this.receiverID = receiverID;
-    }
 }

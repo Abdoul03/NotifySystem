@@ -74,6 +74,7 @@ public class ServiceManage implements DataBaseManage {
             return false;
         }
     }
+
     public static boolean desabonnerUtilisateur(Employe e, Service s) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String sql = "DELETE FROM employe_service WHERE employe_id = ? AND service_id = ?";
