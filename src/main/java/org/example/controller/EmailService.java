@@ -1,9 +1,9 @@
-package controller;
+package org.example.controller;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import java.util.Properties;
-import interfaces.MessageI;
+
 
 public class EmailService {
 
@@ -41,8 +41,4 @@ public class EmailService {
                 e.printStackTrace();
             }
         }
-
-    public static void main(String[] args) {
-        sendEmail("dembeleseydou053@gmail.com","hello", "howx are you to day ?");
-    }
     }

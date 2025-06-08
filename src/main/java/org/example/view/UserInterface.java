@@ -1,6 +1,6 @@
-package view;
+package org.example.view;
 
-import controller.ServiceController;
+import org.example.controller.ServiceController;
 
 import java.util.Scanner;
 

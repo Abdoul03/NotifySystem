@@ -1,7 +1,7 @@
-package db;
+package org.example.db;
 
-import interfaces.DataBaseManage;
-import model.Employe;
+import org.example.interfaces.DataBaseManage;
+import org.example.model.Employe;
 
 import java.sql.*;
 

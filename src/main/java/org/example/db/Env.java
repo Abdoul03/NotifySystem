@@ -1,4 +1,4 @@
-package db;
+package org.example.db;
 
 public class Env {
     public String url = "jdbc:mysql://localhost:3306/notifications?serverTimezone=UTC";

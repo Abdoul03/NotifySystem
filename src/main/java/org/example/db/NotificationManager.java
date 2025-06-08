@@ -1,7 +1,7 @@
-package db;
+package org.example.db;
 
-import interfaces.DataBaseManage;
-import model.Notification;
+import org.example.interfaces.DataBaseManage;
+import org.example.model.Notification;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

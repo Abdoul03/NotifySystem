@@ -1,8 +1,8 @@
-package db;
+package org.example.db;
 
-import interfaces.DataBaseManage;
-import model.Employe;
-import model.Service;
+import org.example.interfaces.DataBaseManage;
+import org.example.model.Employe;
+import org.example.model.Service;
 
 import java.sql.*;
 import java.util.ArrayList;

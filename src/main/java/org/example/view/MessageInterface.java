@@ -1,6 +1,6 @@
-package view;
+package org.example.view;
 
-import controller.MessageService;
+import org.example.controller.MessageService;
 
 import java.util.Scanner;
 

@@ -1,4 +1,7 @@
-import controller.EmployeService;
+package org.example;
+
+import org.example.controller.EmployeService;
+
 
 import java.util.Scanner;
 

@@ -1,11 +1,11 @@
-package controller;
+package org.example.controller;
 
-import db.EmployeManager;
-import db.ServiceManage;
-import model.Employe;
-import model.Service;
-import view.MessageInterface;
-import view.ServiceInterface;
+import org.example.db.EmployeManager;
+import org.example.db.ServiceManage;
+import org.example.model.Employe;
+import org.example.model.Service;
+import org.example.view.MessageInterface;
+import org.example.view.ServiceInterface;
 
 import java.util.List;
 import java.util.Scanner;

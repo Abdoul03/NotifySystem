@@ -1,8 +1,8 @@
-package controller;
+package org.example.controller;
 
-import db.EmployeManager;
-import model.Employe;
-import view.UserInterface;
+import org.example.db.EmployeManager;
+import org.example.model.Employe;
+import org.example.view.UserInterface;
 
 import java.util.Scanner;
 

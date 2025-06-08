@@ -1,6 +1,6 @@
-package interfaces;
+package org.example.interfaces;
+import org.example.db.Env;
 
-import db.Env;
 
 public interface DataBaseManage {
     String URL = new Env().url;
