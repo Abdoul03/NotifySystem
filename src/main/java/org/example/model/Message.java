@@ -8,11 +8,13 @@ public class Message {
     private String contenue;
     private LocalDateTime dateEnvoi;
     private long employeId;
+    private int serviceId;
 
-    public Message (String contenue, long employeId){
+    public Message (String contenue, long employeId, int serviceId){
         this.contenue = contenue;
         this.dateEnvoi = LocalDateTime.now();
         this.employeId = employeId;
+        this.serviceId = serviceId;
     }
  /*   public Message (int id, String contenue, long employeId){
         this.id = id;
@@ -53,4 +55,11 @@ public class Message {
         this.dateEnvoi = dateEnvoi;
     }
 
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
+    }
 }

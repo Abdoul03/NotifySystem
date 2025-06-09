@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.MessageService;
+import org.example.controller.ServiceController;
 
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class MessageInterface {
         int choix;
         do {
             System.out.println("\n=== Message Menu ===");
-            System.out.println("1. Afficher la liste des employés");
+            System.out.println("1. Afficher la liste des employés du service");
             System.out.println("2. Evoyer un message");
             System.out.println("3. Voire mes notification");
             System.out.println("4. retour");
@@ -19,7 +20,7 @@ public class MessageInterface {
             scanner.nextLine(); // vider la ligne
             switch (choix){
                 case 1:
-                    System.out.println("En cours");
+                    new ServiceController().listeDesAbonne(service);
                     break;
                 case 2:
                     new  MessageService().sendMessage(employeId,service);

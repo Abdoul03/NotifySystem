@@ -9,17 +9,19 @@ import java.util.Scanner;
 
 public  class MessageService implements MessageI {
 
-
     @Override
     public void sendMessage(int employId, int serviceId) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("quel est votre message");
         String contenue = scanner.nextLine();
-        EmailService.sendEmail("","Kounafoli",contenue);
+        //EmailService.sendEmail("","Kounafoli",contenue);
 
-        Message message = new Message(contenue, employId);
-        MessageManager.saveMessage(message);
+        Message message = new Message(contenue, employId,serviceId);
+        MessageManager.envoyerMessageAuService(message);
+
+    }
+    public void afficherMessageEmployer(int employId){
 
     }
 }

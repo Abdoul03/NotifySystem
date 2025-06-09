@@ -37,8 +37,7 @@ public class EmployeManager implements DataBaseManage {
                         rs.getInt("id"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getBoolean("isabonnee")
+                        rs.getString("email")
                 );
             }
 
@@ -62,8 +61,7 @@ public class EmployeManager implements DataBaseManage {
                         rs.getInt("id"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getBoolean("isabonnee")
+                        rs.getString("email")
                 );
                 return employe;
             }

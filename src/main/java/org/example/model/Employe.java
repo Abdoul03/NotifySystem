@@ -5,7 +5,7 @@ public class Employe {
     private String nom;
     private String prenom;
     private String email;
-    private boolean isabonnee;
+
 
     //Lors de la l'enregistrement
     public Employe(String nom, String prenom, String email) {
@@ -14,14 +14,14 @@ public class Employe {
         this.email = email;
     }
     //Apres l'enregistrement
-    public Employe(int id, String nom, String prenom, String email, boolean isabonnee){
+    public Employe(int id, String nom, String prenom, String email){
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.isabonnee = isabonnee;
 
     }
+
 
     public int getId() {
         return id;
@@ -55,11 +55,5 @@ public class Employe {
         this.email = email;
     }
 
-    public boolean isIsabonnee() {
-        return isabonnee;
-    }
 
-    public void setIsabonnee(boolean isabonnee) {
-        this.isabonnee = isabonnee;
-    }
 }

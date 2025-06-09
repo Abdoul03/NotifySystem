@@ -154,4 +154,13 @@ public class ServiceController {
             }
         }
     }
+
+    public void listeDesAbonne(int serviceId){
+
+        List<Employe> employes = ServiceManage.listeEmployesParService(serviceId);
+
+        for (Employe e : employes) {
+            System.out.println("Nom : " + e.getNom() + " " + e.getPrenom());
+        }
+    }
 }

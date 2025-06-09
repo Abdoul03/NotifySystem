@@ -89,4 +89,29 @@ public class ServiceManage implements DataBaseManage {
         }
     }
 
+    public static List<Employe> listeEmployesParService(int serviceId) {
+        List<Employe> listeEmployes = new ArrayList<>();
+
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String sql = "SELECT e.* FROM employe_service es " + "JOIN employe e ON es.employe_id = e.id " + "WHERE es.service_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, serviceId);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Employe employe = new Employe(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email")
+                );
+                listeEmployes.add(employe);
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la récupération des employés : " + e.getMessage());
+        }
+        return listeEmployes;
+    }
+
 }
