@@ -26,7 +26,7 @@ public class MessageInterface {
                     new  MessageService().sendMessage(employeId,service);
                     break;
                 case 3:
-                    System.out.println("En cours");
+                    new MessageService().afficherMessageEmployer(employeId);
                     break;
                 case 4:
                     System.out.println("retour");

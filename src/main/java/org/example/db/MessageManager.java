@@ -1,5 +1,6 @@
 package org.example.db;
 
+import org.example.controller.EmailService;
 import org.example.interfaces.DataBaseManage;
 import org.example.model.Employe;
 import org.example.model.Message;
@@ -19,6 +20,21 @@ public class MessageManager implements DataBaseManage {
             stmt.setInt(4, m.getServiceId());
             stmt.executeUpdate();
             System.out.println("Message enregistré!");
+            // Récupérer les emails des abonnés
+            String query = "SELECT e.email FROM employe e " +
+                    "JOIN employe_service es ON es.employe_id = e.id " +
+                    "WHERE es.service_id = ?";
+            PreparedStatement mailStmt = con.prepareStatement(query);
+            mailStmt.setInt(1, m.getServiceId());
+            ResultSet rs = mailStmt.executeQuery();
+
+            // Envoyer l'email à chaque abonné
+            while (rs.next()) {
+                String emailDestinataire = rs.getString("email");
+                String sujet = "Kounafoli";
+                String contenu = m.getContenue() + "\n\nEnvoyé par l'employé ID : " + m.getEmployeId();
+                EmailService.sendEmail(emailDestinataire, sujet, contenu);
+            }
         } catch (SQLException e) {
             System.out.println("Erreur lors d'envoi : " + e.getMessage());
         }
@@ -66,17 +82,41 @@ public class MessageManager implements DataBaseManage {
     }
 
     public static void getEmployNotification(int employeId){
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)){
-            String sql = "SELECT m.contenue, m.dateEnvoi, s.nom AS service" + "FROM employe_message em" + "JOIN message m ON m.id = em.message_id" +
-                    "JOIN service s ON s.id = m.serviceId" +
-                    "WHERE em.employe_id = ?" +
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String sql = "SELECT m.contenue, m.dateEnvoi, s.nom AS service " +
+                    "FROM employe_message em " +
+                    "JOIN message m ON m.id = em.message_id " +
+                    "JOIN service s ON s.id = m.serviceId " +
+                    "JOIN employe e ON e.id = m.sender " +
+                    "WHERE em.employe_id = ? " +
                     "ORDER BY m.dateEnvoi DESC";
+
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, employeId);
             ResultSet rs = stmt.executeQuery();
 
+            System.out.println("📨 Messages reçus :");
+            boolean hasMessage = false;
+            while (rs.next()) {
+                hasMessage = true;
+                String contenue = rs.getString("contenue");
+                Timestamp dateEnvoi = rs.getTimestamp("dateEnvoi");
+                String serviceNom = rs.getString("service");
+                String senderNom = rs.getString("sender_name");
+
+                System.out.println("──────────────────────────────────");
+                System.out.println("👤 De       : " + senderNom);
+                System.out.println("📅 Date     : " + dateEnvoi);
+                System.out.println("📌 Service  : " + serviceNom);
+                System.out.println("✉️ Message  : " + contenue);
+            }
+
+            if (!hasMessage) {
+                System.out.println("Aucun message reçu.");
+            }
+
         } catch (Exception e) {
-            System.out.println("Erreur récupération des message : " + e.getMessage());
+            System.out.println("❌ Erreur récupération des messages : " + e.getMessage());
         }
     }
 }

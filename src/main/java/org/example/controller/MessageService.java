@@ -15,13 +15,12 @@ public  class MessageService implements MessageI {
 
         System.out.println("quel est votre message");
         String contenue = scanner.nextLine();
-        //EmailService.sendEmail("","Kounafoli",contenue);
 
         Message message = new Message(contenue, employId,serviceId);
         MessageManager.envoyerMessageAuService(message);
 
     }
     public void afficherMessageEmployer(int employId){
-
+        MessageManager.getEmployNotification(employId);
     }
 }
