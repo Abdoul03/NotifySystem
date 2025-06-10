@@ -1,7 +1,6 @@
 package org.example.db;
 
 import org.example.controller.EmailService;
-import org.example.interfaces.DataBaseManage;
 import org.example.model.Employe;
 import org.example.model.Message;
 
@@ -9,9 +8,11 @@ import java.sql.*;
 import java.util.List;
 
 
-public class MessageManager implements DataBaseManage {
-    public static void saveMessage(Message m){
-        try(Connection con = DriverManager.getConnection(URL, USER, PASS)){
+public class MessageManager {
+    private Connection con = MysqlConnexion.getInstance().con;
+    //Envoyer un message
+    public void saveMessage(Message m){
+        try{
             String sql = "INSERT INTO message(contenue,dateEnvoi, sender, serviceId) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, m.getContenue());
@@ -39,19 +40,19 @@ public class MessageManager implements DataBaseManage {
             System.out.println("Erreur lors d'envoi : " + e.getMessage());
         }
     }
-
-    public static void envoyerMessageAuService(Message m) {
+    //Diffusé le message a tous les utilisateurs abonnée au service
+    public void envoyerMessageAuService(Message m) {
         saveMessage(m); // 1. Enregistre le message
 
         int messageId = getLastInsertedMessageId(); // 2. Récupérer l’ID du message
-        List<Employe> employes = ServiceManage.listeEmployesParService(m.getServiceId()); // 3. Liste abonnés
+        List<Employe> employes = new ServiceManage().listeEmployesParService(m.getServiceId()); // 3. Liste abonnés
 
         if (employes.isEmpty()) {
             System.out.println("Aucun membre abonné au service.");
             return;
         }
 
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+        try  {
             String sql = "INSERT INTO employe_message (message_id, employe_id) VALUES (?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -66,11 +67,12 @@ public class MessageManager implements DataBaseManage {
             System.out.println("Erreur lors de la diffusion : " + e.getMessage());
         }
     }
-
-    public static int getLastInsertedMessageId() {
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS);
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS id FROM message")) {
+    //Recuperer le dernier message
+    public  int getLastInsertedMessageId() {
+        try{
+            String sql = "SELECT MAX(id) AS id FROM message";
+            PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 return rs.getInt("id");
@@ -80,9 +82,9 @@ public class MessageManager implements DataBaseManage {
         }
         return -1;
     }
-
-    public static void getEmployNotification(int employeId){
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+    //Afficher les Notifications d'un utilisateur
+    public void getEmployNotification(int employeId){
+        try  {
             String sql = "SELECT m.contenue, m.dateEnvoi, s.nom AS service " +
                     "FROM employe_message em " +
                     "JOIN message m ON m.id = em.message_id " +
@@ -116,7 +118,7 @@ public class MessageManager implements DataBaseManage {
             }
 
         } catch (Exception e) {
-            System.out.println("❌ Erreur récupération des messages : " + e.getMessage());
+            System.out.println("Erreur récupération des messages : " + e.getMessage());
         }
     }
 }

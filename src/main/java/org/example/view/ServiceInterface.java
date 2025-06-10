@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class ServiceInterface {
     public  static  void serviceMenu(int employeId){
+        //Recupperer l'entré de l'utilisateur
         Scanner scanner = new Scanner(System.in);
         int choix;
         do {

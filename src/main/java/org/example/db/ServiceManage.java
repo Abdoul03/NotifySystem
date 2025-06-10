@@ -1,6 +1,5 @@
 package org.example.db;
 
-import org.example.interfaces.DataBaseManage;
 import org.example.model.Employe;
 import org.example.model.Service;
 
@@ -8,9 +7,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceManage implements DataBaseManage {
-    public static void saveService(Service s){
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)){
+public class ServiceManage {
+    private Connection con = MysqlConnexion.getInstance().con;
+
+    //Creer un neauveau Employé
+    public void saveService(Service s){
+        try {
             String sql = "INSERT INTO service (nom, des, IdEmploye) VALUE (?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -25,10 +27,10 @@ public class ServiceManage implements DataBaseManage {
             System.out.println("Erreur lors de l'enregistrement : " + e.getMessage());
         }
     }
-
-    public static List<Service> afficheService(){
+    //Afficher les Service
+    public List<Service> afficheService(){
        List <Service> services = new ArrayList<>();
-        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+        try{
             String sql = "SELECT * FROM service";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -47,9 +49,9 @@ public class ServiceManage implements DataBaseManage {
         }
         return services;
     }
-
-    public static boolean abonnerUtilisateur(Employe e, Service s){
-        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+    //Abonnemment d'un utilisateur
+    public boolean abonnerUtilisateur(Employe e, Service s){
+        try{
 
             // Vérifier si l’abonnement existe déjà
             String sql = "SELECT * FROM employe_service WHERE employe_id = ? AND service_id = ?";
@@ -74,9 +76,9 @@ public class ServiceManage implements DataBaseManage {
             return false;
         }
     }
-
-    public static boolean desabonnerUtilisateur(Employe e, Service s) {
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+    //Desabonnement de l'utilisateur
+    public boolean desabonnerUtilisateur(Employe e, Service s) {
+        try {
             String sql = "DELETE FROM employe_service WHERE employe_id = ? AND service_id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, e.getId());
@@ -88,11 +90,11 @@ public class ServiceManage implements DataBaseManage {
             return false;
         }
     }
-
-    public static List<Employe> listeEmployesParService(int serviceId) {
+    //Afficher les employés qui sont abonnée a un service
+    public List<Employe> listeEmployesParService(int serviceId) {
         List<Employe> listeEmployes = new ArrayList<>();
 
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+        try{
             String sql = "SELECT e.* FROM employe_service es " + "JOIN employe e ON es.employe_id = e.id " + "WHERE es.service_id = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);

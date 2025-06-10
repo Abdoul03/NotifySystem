@@ -21,14 +21,14 @@ public class ServiceController {
         String des = scanner.nextLine();
 
         Service service = new Service(nom,des,employeId);
-        ServiceManage.saveService(service);
+        new ServiceManage().saveService(service);
 
     }
 
     public  void affichersServices(int employeId){
         System.out.println("Liste des Services");
 
-        List<Service> services = ServiceManage.afficheService() ;
+        List<Service> services = new ServiceManage().afficheService() ;
         for (Service s :services) {
             System.out.println("Nom :" + " " + s.getNom() + " " + "Description :" + " " + s.getDes());
         }
@@ -37,7 +37,7 @@ public class ServiceController {
 
     public void serviceAbonnement(int employeId) {
         Scanner scanner = new Scanner(System.in);
-        List<Service> services = ServiceManage.afficheService();
+        List<Service> services = new ServiceManage().afficheService();
 
         if (services.isEmpty()) {
             System.out.println("Aucun service disponible pour le moment.");
@@ -45,7 +45,7 @@ public class ServiceController {
         }
 
         //Récupérer l'objet Employe depuis son ID
-        Employe employe = EmployeManager.getEmployeById(employeId); // méthode à créer si elle n’existe pas
+        Employe employe = new  EmployeManager().getEmployeById(employeId); // méthode à créer si elle n’existe pas
         if (employe == null) {
             System.out.println("Employé introuvable.");
             return;
@@ -83,7 +83,7 @@ public class ServiceController {
 
             if (serviceChoisi != null) {
                 //boolean success = ServiceManage.abonnerUtilisateur( employeId, serviceChoisi.getId());
-                boolean success = ServiceManage.abonnerUtilisateur(employe, serviceChoisi);
+                boolean success = new ServiceManage().abonnerUtilisateur(employe, serviceChoisi);
                 if (success) {
                     System.out.println("Abonnement réussi au service : " + serviceChoisi.getNom());
                     //MessageInterface.messageMenu(employeId, serviceChoisi.getId());
@@ -99,7 +99,7 @@ public class ServiceController {
 
     public void serviceDesabonnee(int employeId){
         Scanner scanner= new Scanner(System.in);
-        List<Service> services = ServiceManage.afficheService() ;
+        List<Service> services = new ServiceManage().afficheService() ;
 
         if (services.isEmpty()) {
             System.out.println("Aucun service disponible pour le moment.");
@@ -107,7 +107,7 @@ public class ServiceController {
         }
 
         //Récupérer l'objet Employe depuis son ID
-        Employe employe = EmployeManager.getEmployeById(employeId); // méthode à créer si elle n’existe pas
+        Employe employe = new EmployeManager().getEmployeById(employeId); // méthode à créer si elle n’existe pas
         if (employe == null) {
             System.out.println("Employé introuvable.");
             return;
@@ -143,7 +143,7 @@ public class ServiceController {
             }
 
             if (serviceChoisi != null) {
-                boolean success = ServiceManage.desabonnerUtilisateur(employe, serviceChoisi);
+                boolean success = new ServiceManage().desabonnerUtilisateur(employe, serviceChoisi);
                 if (success) {
                     System.out.println("Vous vous etes desabonnée du : " + serviceChoisi.getNom());
                 } else {
@@ -157,7 +157,7 @@ public class ServiceController {
 
     public void listeDesAbonne(int serviceId){
 
-        List<Employe> employes = ServiceManage.listeEmployesParService(serviceId);
+        List<Employe> employes = new ServiceManage().listeEmployesParService(serviceId);
 
         for (Employe e : employes) {
             System.out.println("Nom : " + e.getNom() + " " + e.getPrenom());

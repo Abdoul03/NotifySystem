@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class HomeInterface {
     public static void home(){
+        //Recupperer l'entré de l'utilisateur=:
         EmployeService employeService = new EmployeService();
         Scanner scanner = new Scanner(System.in);
         int choix;

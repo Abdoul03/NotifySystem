@@ -1,14 +1,14 @@
 package org.example.db;
 
-import org.example.interfaces.DataBaseManage;
 import org.example.model.Employe;
 
 import java.sql.*;
 
 
-public class EmployeManager implements DataBaseManage {
-    public static void saveEmploye(Employe e) {
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)){
+public class EmployeManager{
+    private Connection con = MysqlConnexion.getInstance().con;
+    public void saveEmploye(Employe e) {
+        try {
             String sql = "INSERT INTO Employe (nom, prenom, email) VALUES (?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -24,9 +24,9 @@ public class EmployeManager implements DataBaseManage {
         }
     }
 
-    public static Employe authentifierEmploye(String email) {
+    public Employe authentifierEmploye(String email) {
         Employe employe = null;
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)){
+        try{
             String sql = "SELECT * FROM Employe WHERE email = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, email);
@@ -48,8 +48,8 @@ public class EmployeManager implements DataBaseManage {
         return employe;
     }
 
-    public static Employe getEmployeById(int id) {
-        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+    public Employe getEmployeById(int id) {
+        try{
             String sql = "SELECT * FROM employe WHERE id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);

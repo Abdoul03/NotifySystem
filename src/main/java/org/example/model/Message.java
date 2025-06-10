@@ -10,18 +10,13 @@ public class Message {
     private long employeId;
     private int serviceId;
 
+    //Lors de la l'enregistrement
     public Message (String contenue, long employeId, int serviceId){
         this.contenue = contenue;
         this.dateEnvoi = LocalDateTime.now();
         this.employeId = employeId;
         this.serviceId = serviceId;
     }
- /*   public Message (int id, String contenue, long employeId){
-        this.id = id;
-        this.contenue = contenue;
-        this.dateEnvoi = LocalDateTime.now();
-        this.employeId = employeId;
-    }*/
 
     public int getId() {
         return id;

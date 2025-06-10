@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     public  static  void  UserInteracton(int id){
+        //Recupperer l'entré de l'utilisateur
         Scanner scanner = new Scanner(System.in);
         int choix;
         do {

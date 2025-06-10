@@ -17,10 +17,10 @@ public  class MessageService implements MessageI {
         String contenue = scanner.nextLine();
 
         Message message = new Message(contenue, employId,serviceId);
-        MessageManager.envoyerMessageAuService(message);
+        new  MessageManager().envoyerMessageAuService(message);
 
     }
     public void afficherMessageEmployer(int employId){
-        MessageManager.getEmployNotification(employId);
+       new MessageManager().getEmployNotification(employId);
     }
 }

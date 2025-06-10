@@ -23,7 +23,7 @@ public class EmployeService {
         Employe employe = new Employe(nom, prenom, email);
 
         //Save Employe dans la db
-        EmployeManager.saveEmploye(employe);
+       new EmployeManager().saveEmploye(employe);
 
     }
     public  void auth(){
@@ -32,7 +32,7 @@ public class EmployeService {
         System.out.println("Donne votre email");
         String email = scanner.nextLine();
 
-        Employe e = EmployeManager.authentifierEmploye(email);
+        Employe e = new  EmployeManager().authentifierEmploye(email);
 
         if (e != null){
             System.out.println("connexion reussi");
@@ -43,13 +43,6 @@ public class EmployeService {
             System.out.println("Oups Email imtrouvable veuillez creer un compte !");
         }
 
-
-    }
-    public void abonne (){
-
-    }
-
-    public void desabonne (){
 
     }
 }

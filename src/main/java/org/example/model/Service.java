@@ -10,13 +10,14 @@ public class Service {
     private int IdEmploye;
     private List<Integer> membersId = new ArrayList<>();
 
-
+    //Lors de la l'enregistrement
     public Service( String nom, String des, int IdEmploye) {
         this.nom = nom;
         this.des = des;
         this.IdEmploye = IdEmploye;
 
     }
+    //Apres l'enregistrement
     public Service( int id,String nom, String des, int IdEmploye) {
         this.id=id;
         this.nom = nom;
