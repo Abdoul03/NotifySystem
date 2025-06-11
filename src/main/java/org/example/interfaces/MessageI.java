@@ -1,5 +1,6 @@
 package org.example.interfaces;
 
 public interface MessageI {
-    public void sendMessage(int employId, int serviceId );
+    void sendMessage(int employId, int serviceId ,String to, String subject, String content);
+    void afficheMessa(int employId);
 }

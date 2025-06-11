@@ -21,6 +21,7 @@ public class MessageManager {
             stmt.setInt(4, m.getServiceId());
             stmt.executeUpdate();
             System.out.println("Message enregistré!");
+
             // Récupérer les emails des abonnés
             String query = "SELECT e.email FROM employe e " +
                     "JOIN employe_service es ON es.employe_id = e.id " +
@@ -34,7 +35,7 @@ public class MessageManager {
                 String emailDestinataire = rs.getString("email");
                 String sujet = "Kounafoli";
                 String contenu = m.getContenue() + "\n\nEnvoyé par l'employé ID : " + m.getEmployeId();
-                EmailService.sendEmail(emailDestinataire, sujet, contenu);
+                new EmailService().sendMessage(0,0,emailDestinataire, sujet, contenu);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors d'envoi : " + e.getMessage());
@@ -89,7 +90,7 @@ public class MessageManager {
                     "FROM employe_message em " +
                     "JOIN message m ON m.id = em.message_id " +
                     "JOIN service s ON s.id = m.serviceId " +
-                    "JOIN employe e ON e.id = m.sender " +
+                    //"JOIN employe e ON e.id = m.sender " +
                     "WHERE em.employe_id = ? " +
                     "ORDER BY m.dateEnvoi DESC";
 
@@ -104,13 +105,13 @@ public class MessageManager {
                 String contenue = rs.getString("contenue");
                 Timestamp dateEnvoi = rs.getTimestamp("dateEnvoi");
                 String serviceNom = rs.getString("service");
-                String senderNom = rs.getString("sender_name");
+                //String senderNom = rs.getString("sender_name");
 
                 System.out.println("──────────────────────────────────");
-                System.out.println("👤 De       : " + senderNom);
-                System.out.println("📅 Date     : " + dateEnvoi);
-                System.out.println("📌 Service  : " + serviceNom);
-                System.out.println("✉️ Message  : " + contenue);
+                //System.out.println("De       : " + senderNom);
+                System.out.println("Date     : " + dateEnvoi);
+                System.out.println("Service  : " + serviceNom);
+                System.out.println("Message  : " + contenue);
             }
 
             if (!hasMessage) {

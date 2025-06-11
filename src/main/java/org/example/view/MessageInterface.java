@@ -1,7 +1,7 @@
 package org.example.view;
 
+import org.example.controller.EmployeService;
 import org.example.controller.MessageService;
-import org.example.controller.ServiceController;
 
 import java.util.Scanner;
 
@@ -21,13 +21,13 @@ public class MessageInterface {
             scanner.nextLine(); // vider la ligne
             switch (choix){
                 case 1:
-                    new ServiceController().listeDesAbonne(service);
+                    new EmployeService().abonnerAuServie(service);
                     break;
                 case 2:
-                    new  MessageService().sendMessage(employeId,service);
+                    new  MessageService().sendMessage(employeId,service,null,null,null);
                     break;
                 case 3:
-                    new MessageService().afficherMessageEmployer(employeId);
+                    new MessageService().afficheMessa(employeId);
                     break;
                 case 4:
                     System.out.println("retour");

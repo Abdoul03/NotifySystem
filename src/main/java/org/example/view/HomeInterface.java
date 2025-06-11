@@ -21,10 +21,10 @@ public class HomeInterface {
             scanner.nextLine(); // vider la ligne
             switch (choix){
                 case 1:
-                    employeService.saveEmployInformation();
+                    employeService.creerEmploye();
                     break;
                 case 2:
-                    employeService.auth();
+                    employeService.authentifier();
                     break;
                 case 3:
                     System.out.println("Merci d’avoir utilisé notre système !");

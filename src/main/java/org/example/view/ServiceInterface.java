@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.controller.ServiceController;
+import org.example.controller.EmployeService;
 
 import java.util.Scanner;
 
@@ -19,10 +19,10 @@ public class ServiceInterface {
             scanner.nextLine(); // vider la ligne
             switch (choix){
                 case 1:
-                    new ServiceController().serviceAbonnement(employeId);
+                    new EmployeService().abonnement(employeId);
                     break;
                 case 2:
-                    new  ServiceController().serviceDesabonnee(employeId);
+                    new  EmployeService().desabonnement(employeId);
                     break;
                 case 3:
                     System.out.println("retour");

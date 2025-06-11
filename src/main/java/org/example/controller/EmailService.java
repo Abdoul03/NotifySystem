@@ -2,12 +2,25 @@ package org.example.controller;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+import org.example.interfaces.MessageI;
+
 import java.util.Properties;
 
 
-public class EmailService {
+public class EmailService implements MessageI {
 
-        public static void sendEmail(String to, String subject, String content) {
+        @Override
+        public void sendMessage(int employId, int serviceId ,String to, String subject, String content) {
+
+            sendEmail(to, subject, content);
+        }
+
+        @Override
+        public void afficheMessa(int employId) {
+            System.out.println("en cours");
+        }
+
+        private void sendEmail(String to, String subject, String content) {
             final String from = "samabdoul03@gmail.com";
             final String password = "sciu elmo ebks ibxp"; // Utilise un mot de passe d'application Gmail
 
@@ -41,4 +54,4 @@ public class EmailService {
                 e.printStackTrace();
             }
         }
-    }
+}

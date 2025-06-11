@@ -7,10 +7,10 @@ import org.example.model.Message;
 
 import java.util.Scanner;
 
-public  class MessageService implements MessageI {
+public class MessageService implements MessageI {
 
     @Override
-    public void sendMessage(int employId, int serviceId) {
+    public void sendMessage(int employId, int serviceId ,String to, String subject, String content) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("quel est votre message");
@@ -20,7 +20,10 @@ public  class MessageService implements MessageI {
         new  MessageManager().envoyerMessageAuService(message);
 
     }
-    public void afficherMessageEmployer(int employId){
-       new MessageManager().getEmployNotification(employId);
+
+    @Override
+    public void afficheMessa(int employId) {
+        new MessageManager().getEmployNotification(employId);
     }
+
 }

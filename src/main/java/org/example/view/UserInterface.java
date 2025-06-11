@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.controller.ServiceController;
+import org.example.controller.EmployeService;
 
 import java.util.Scanner;
 
@@ -19,10 +19,10 @@ public class UserInterface {
 
             switch (choix) {
                 case 1:
-                    new ServiceController().createServiceNotification(id);
+                    new EmployeService().creeUnService(id);
                     break;
                 case 2:
-                    new ServiceController().affichersServices(id);
+                    new EmployeService().afficheService(id);
                     break;
                 case 3:
                     System.out.println("Vous êtes déconnecter !");
