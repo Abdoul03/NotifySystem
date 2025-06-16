@@ -1,16 +1,15 @@
 package org.example.view;
 
-import org.example.controller.EmployeService;
+import org.example.Controller.EmployeController;
+import org.example.Models.Employe;
 
 import java.util.Scanner;
 
 public class HomeInterface {
     public static void home(){
         //Recupperer l'entré de l'utilisateur=:
-        EmployeService employeService = new EmployeService();
         Scanner scanner = new Scanner(System.in);
         int choix;
-
         do {
             System.out.println("\n=== Menu Principal ===");
             System.out.println("1. Créer un compte");
@@ -21,10 +20,22 @@ public class HomeInterface {
             scanner.nextLine(); // vider la ligne
             switch (choix){
                 case 1:
-                    employeService.creerEmploye();
+                    System.out.println("Quel est votre nom ?");
+                    String nom = scanner.nextLine();
+
+                    System.out.println("Quel est votre prenom ?");
+                    String prenom = scanner.nextLine();
+
+                    System.out.println("Quel est votre email ?");
+                    String email = scanner.nextLine();
+                    //Creer un  nouveau objet employer
+                    Employe employe = new Employe(nom, prenom, email);
+                    new EmployeController().enregistreEmploye(employe);
                     break;
                 case 2:
-                    employeService.authentifier();
+                    System.out.println("Donne votre email");
+                    String emailAu = scanner.nextLine();
+                    new EmployeController().connexion(emailAu);
                     break;
                 case 3:
                     System.out.println("Merci d’avoir utilisé notre système !");
@@ -33,6 +44,5 @@ public class HomeInterface {
                     System.out.println("Choix invalide, essayez encore.");
             }
         }while (choix != 3);
-
     }
 }

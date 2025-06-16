@@ -1,27 +1,26 @@
-package org.example.model;
+package org.example.Models;
 
 public class Employe {
     private int id;
     private String nom;
     private String prenom;
     private String email;
+    private boolean estAbonne;
 
-
-    //Lors de la l'enregistrement
-    public Employe(String nom, String prenom, String email) {
+    public Employe(String nom, String prenom, String email){
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+        this.estAbonne = true;
     }
-    //Apres l'enregistrement
-    public Employe(int id, String nom, String prenom, String email){
+
+    public Employe(int id, String nom, String prenom, String email, boolean estAbonne) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-
+        this.estAbonne = estAbonne;
     }
-
 
     public int getId() {
         return id;
@@ -55,5 +54,12 @@ public class Employe {
         this.email = email;
     }
 
+    public boolean isEstAbonne() {
+        return estAbonne;
+    }
+
+    public void setEstAbonne(boolean estAbonne) {
+        this.estAbonne = estAbonne;
+    }
 
 }
